@@ -3,6 +3,8 @@ import listEndpoints from "express-list-endpoints";
 import cors from "cors";
 import attendeesRoute from "./Components/attendees/attendeesIndex.js";
 import eventsRoute from "./Components/events/eventsIndex.js";
+import emailRoute from "./Components/sendemail/sendEmail.js";
+// import PDFRoute from "./Components/pdfToAttendant/savePDF.js";
 import {
   notFoundErrorHandler,
   badRequestErrorHandler,
@@ -31,6 +33,8 @@ server.use(express.json());
 //ROUTES
 server.use("/events", eventsRoute);
 server.use("/attendees", attendeesRoute);
+// server.use("/savePDF", PDFRoute);
+server.use("/sendemail", emailRoute);
 
 //ERROR
 server.use(notFoundErrorHandler);
