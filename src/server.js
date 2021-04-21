@@ -4,7 +4,7 @@ import cors from "cors";
 import attendeesRoute from "./Components/attendees/attendeesIndex.js";
 import eventsRoute from "./Components/events/eventsIndex.js";
 import emailRoute from "./Components/sendemail/sendEmail.js";
-// import PDFRoute from "./Components/pdfToAttendant/savePDF.js";
+import PDFRoute from "./Components/pdfToAttendant/savePDF.js";
 import {
   notFoundErrorHandler,
   badRequestErrorHandler,
@@ -15,7 +15,7 @@ import {
 const server = express();
 const port = process.env.PORT;
 
-const whiteList = [process.env.FE_URL_DEV, process.env.FE_URL_PROD];
+const whiteList = [process.env.FE_URL_DEV];
 
 const corsOption = {
   origin: (origin, next) => {
@@ -33,7 +33,7 @@ server.use(express.json());
 //ROUTES
 server.use("/events", eventsRoute);
 server.use("/attendees", attendeesRoute);
-// server.use("/savePDF", PDFRoute);
+server.use("/savePDF", PDFRoute);
 server.use("/sendemail", emailRoute);
 
 //ERROR
