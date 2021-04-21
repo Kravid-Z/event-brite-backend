@@ -1,7 +1,14 @@
-import expres from "express";
-import listenEndpoints from "express-list-endpoints";
+import express from "express";
+import listEndpoints from "express-list-endpoints";
 import cors from "cors";
 import attendeesRoute from "./Components/attendees/attendeesIndex.js";
+import eventsRoute from "./Components/events/eventsIndex.js";
+import {
+  notFoundErrorHandler,
+  badRequestErrorHandler,
+  forbiddenErrorHandler,
+  catchAllErrorsHandler,
+} from "./Common/errorHandlerGeneral.js";
 
 const server = express();
 const port = process.env.PORT;
@@ -22,7 +29,14 @@ server.use(cors(corsOption));
 server.use(express.json());
 
 //ROUTES
+server.use("/events", eventsRoute);
 server.use("/attendees", attendeesRoute);
+
+//ERROR
+server.use(notFoundErrorHandler);
+server.use(badRequestErrorHandler);
+server.use(forbiddenErrorHandler);
+server.use(catchAllErrorsHandler);
 
 console.log(listEndpoints(server));
 
