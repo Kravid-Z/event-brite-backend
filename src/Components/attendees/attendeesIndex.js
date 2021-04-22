@@ -1,7 +1,7 @@
 import express from "express";
 import { v4 as uuid } from "uuid";
 import { check, validationResult } from "express-validator";
-import {getAttendees, writeAttendees} from "fsx-services-attendees.js"
+import {getAttendees, writeAttendees} from "./fsx-services-attendees.js"
 
 const router = express.Router();
 const middlewareValidator = [

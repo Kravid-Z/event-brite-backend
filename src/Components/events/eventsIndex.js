@@ -1,12 +1,12 @@
 import express from "express";
 import { v4 as uuid } from "uuid";
 import { check, validationResult } from "express-validator";
-import { getEvents, writeEvents } from "fsx-services-events.js";
+import { getEvents, writeEvents } from "./fsx-services-events.js";
 
 const router = express.Router();
 const middlewareValidator = [
-  check("EventName").exists().withMessage("EventName is mandatory field!"),
-  check("Description").exists().withMessage("Description is mandatory field!"),
+  check("eventName").exists().withMessage("EventName is mandatory field!"),
+  check("description").exists().withMessage("Description is mandatory field!"),
 ];
 
 /**SCHEMA EVENTS
@@ -55,6 +55,7 @@ router.post("/", middlewareValidator, async (req, res, next) => {
       const err = new Error();
       err.errorList = errors;
       err.statusCode = 400;
+      console.log(err.errorList);
       next("error in POST Event, pasing it to errorHandling", err); // passing error to errorHandling
     } else {
       const events = await getEvents();
